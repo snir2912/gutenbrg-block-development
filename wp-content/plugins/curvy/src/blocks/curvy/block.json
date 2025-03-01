@@ -9,13 +9,38 @@
 	"description": "Curvy shape deviders.",
 	"example": {},
 	"supports": {
-		"html": false
+		"html": false,
+		"color": {
+			"background": true,
+			"link": true,
+			"text": true
+		},
+		"spacing": {
+			"padding": true,
+			"margin": true
+		}
 	},
 	"attributes": {
-		"enableTopCurve":{
+		"style": {
+			"type": "object",
+			"default": {
+				"color": {
+					"background": "red"
+				},
+				"spacing": {
+					"padding": {
+						"top": "50px",
+						"bottom": "50px",
+						"left": "50px",
+						"right": "50px"
+					}
+				}
+			}
+		},
+		"enableTopCurve": {
 			"type": "boolean",
-            "default": true
-        }
+			"default": true
+		}
 	},
 	"textdomain": "blockylicious",
 	"editorScript": "file:./index.js",

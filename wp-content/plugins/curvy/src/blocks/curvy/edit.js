@@ -3,7 +3,7 @@
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
  */
-import { __ } from '@wordpress/i18n';
+import { __ } from "@wordpress/i18n";
 
 /**
  * React hook that is used to mark the block wrapper element.
@@ -11,8 +11,9 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import{PanelBody, ToggleControl} from '@wordpress/components';
+import { useBlockProps, InspectorControls } from "@wordpress/block-editor";
+import { PanelBody, ToggleControl } from "@wordpress/components";
+
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -20,7 +21,7 @@ import{PanelBody, ToggleControl} from '@wordpress/components';
  *
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
-import './editor.scss';
+import "./editor.scss";
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -30,27 +31,29 @@ import './editor.scss';
  *
  * @return {Element} Element to render.
  */
-import metadata from './block.json';
-import { Curve } from './components/curve';
+import metadata from "./block.json";
+import { Curve } from "./components/curve";
 export default function Edit(props) {
+	const { className, ...BlockProps } = useBlockProps();
 	return (
 		<>
-			<Curve />
-			<p 
-			{...useBlockProps.save()}>
-			{__("Curvy – hello from the saved content!", metadata.textdomain)}</p>
+			<section className={`${className} alignfull`}{...BlockProps}>
+				{props.attributes.enableTopCurve && <Curve/>}
+			</section>
 			<InspectorControls>
 				<PanelBody title={__("Top curve", metadata.textdomain)}>
-					<div style={{display: "flex"}}>
-						<ToggleControl onChange={(isChacked)=>{
-							props.setAttributes({enableTopCurve: isChacked});
-						}} checked={props.attributes.enableTopCurve} />
-						<span>
-							{__("Enable top curve", metadata.textdomain)}:
-						</span>
+					<div style={{ display: "flex" }}>
+						<ToggleControl
+							onChange={(isChecked) => {
+								props.setAttributes({ enableTopCurve: isChecked });
+							}}
+							checked={props.attributes.enableTopCurve}
+						/>
+						<span>{__("Enable top curve", metadata.textdomain)}:</span>
 					</div>
 				</PanelBody>
 			</InspectorControls>
 		</>
 	);
 }
+
