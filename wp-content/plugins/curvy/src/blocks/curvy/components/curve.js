@@ -1,4 +1,4 @@
-export const Curve = () => {
+export const Curve = (props) => {
 	return (
 		<div>
 			<svg style={{position: "absolute", top: 0, left: 0}}
