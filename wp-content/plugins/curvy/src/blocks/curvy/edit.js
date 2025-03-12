@@ -16,7 +16,7 @@ import {
 	PanelBody,
 	ToggleControl,
 	HorizontalRule,
-	RangeControl
+	RangeControl,
 } from "@wordpress/components";
 
 /**
@@ -42,10 +42,12 @@ export default function Edit(props) {
 	return (
 		<>
 			<section className={`${className} alignfull`} {...BlockProps}>
-				{props.attributes.enableTopCurve && 
-					<Curve 
-						height={props.attributes.topHeight} 
-						width={props.attributes.topWidth} />}
+				{props.attributes.enableTopCurve && (
+					<Curve
+						height={props.attributes.topHeight}
+						width={props.attributes.topWidth}
+					/>
+				)}
 			</section>
 			<InspectorControls>
 				<PanelBody title={__("Top curve", metadata.textdomain)}>
@@ -61,31 +63,53 @@ export default function Edit(props) {
 					{props.attributes.enableTopCurve && (
 						<>
 							<HorizontalRule />
-							<RangeControl 
-							min={100} 
-							max={300} 
-							value={props.attributes.topWidth || 100} 
-							onChange={(newValue)=>{
-								props.setAttributes({
-									topWidth: parseInt(newValue)
-								})
-							}}
-							label={__("width", metadata.textdomain)} />
+							<RangeControl
+								min={100}
+								max={300}
+								value={props.attributes.topWidth || 100}
+								onChange={(newValue) => {
+									props.setAttributes({
+										topWidth: parseInt(newValue),
+									});
+								}}
+								label={__("width", metadata.textdomain)}
+							/>
 						</>
 					)}
 					{props.attributes.enableTopCurve && (
 						<>
 							<HorizontalRule />
-							<RangeControl 
-							min={0} 
-							max={200} 
-							value={props.attributes.topHeight} 
-							onChange={(newValue)=>{
-								props.setAttributes({
-									topHeight: parseInt(newValue)
-								})
-							}}
-							label={__("height", metadata.textdomain)} />
+							<RangeControl
+								min={0}
+								max={200}
+								value={props.attributes.topHeight}
+								onChange={(newValue) => {
+									props.setAttributes({
+										topHeight: parseInt(newValue),
+									});
+								}}
+								label={__("height", metadata.textdomain)}
+							/>
+							<HorizontalRule />
+							<div style={{ display: "flex" }}>
+								<ToggleControl
+									onChange={(isChecked) => {
+										props.setAttributes({ topFlipX: isChecked });
+									}}
+									checked={props.attributes.topFlipX}
+								/>
+								<span>{__("Flip horizonaly", metadata.textdomain)}:</span>
+							</div>
+							<HorizontalRule />
+							<div style={{ display: "flex" }}>
+								<ToggleControl
+									onChange={(isChecked) => {
+										props.setAttributes({ topFlipY: isChecked });
+									}}
+									checked={props.attributes.topFlipY}
+								/>
+								<span>{__("Flip vertically", metadata.textdomain)}:</span>
+							</div>
 						</>
 					)}
 				</PanelBody>
